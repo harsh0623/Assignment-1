@@ -39,14 +39,11 @@ let students=[{
     id:10,
     marks:{english:30,maths:25,science:31}
 }];
-for(let i=0;i<students.length;i++){
-students[i].averagemarks=(students[i].marks.english + students[i].marks.maths + students[i].marks.science)/3;
-students[i].result=students[i].averagemarks>=33
- && students[i].marks.english>=33
- && students[i].marks.math>=33 
- && students[i].marks.science>=33 ? "Pass" :"Fail";
-console.log(students[i])};
-
 for(let student of students){
-    console.log(student);
-}
+student.averagemarks=(student.marks.english + student.marks.maths + student.marks.science)/3;
+student.result=student.averagemarks>=33
+ && student.marks.english>=33
+ && student.marks.math>=33 
+ && students.marks.science>=33 ? "Pass" :"Fail";
+console.log(student)};
+
