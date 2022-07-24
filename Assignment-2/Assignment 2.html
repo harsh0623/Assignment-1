@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Digital clock
+        </title>
+        <style>
+            body{
+                background: linear-gradient(to right,rgb(54, 47, 54),rgb(40, 109, 94)) ;
+            }
+            #date
+            {
+                position:absolute;
+                top:30%;
+                left:35%;
+                font-weight:normal ;
+                font-size: 70px;
+                border: 3px outset rgba(0, 0, 0, 0.37);
+                border-radius: 30px;
+                background: linear-gradient(rgb(104, 134, 190),rgb(197, 104, 120));
+                box-shadow: 1px 1px 2px black, 0 0 1em rgb(129, 129, 201), 0 0 0.2em rgb(12, 102, 67);;
+            }           
+        </style>
+        </head>
+<body> 
+    <div id="date">
+        00 : 00 :00 AM
+    </div>          
+<script>
+    setInterval(Current_Time,1000);
+    function Current_Time(){
+    let time=new Date();
+    
+    var hrs=time.getHours();
+    var min=time.getMinutes();
+    var sec=time.getSeconds();
+    var session="AM";
+
+    if(hrs>12){
+    hrs=hrs-12;
+    session="PM";
+}
+if(hrs<=12){
+    hrs=hrs;
+}
+hrs= hrs < 10 ? "0"+hrs : hrs;
+min= min < 10 ? "0"+min : min;
+sec= sec < 10 ? "0"+sec : sec;
+var showtime=hrs+" :"+min+" :"+sec+"  "+session;
+document.getElementById('date').innerHTML=showtime;
+}
+Current_Time();
+</script>
+</body>
+</html>
