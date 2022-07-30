@@ -43,7 +43,7 @@ for(let student of students){
 student.averagemarks=(student.marks.english + student.marks.maths + student.marks.science)/3;
 student.result=student.averagemarks>=33
  && student.marks.english>=33
- && student.marks.math>=33 
- && students.marks.science>=33 ? "Pass" :"Fail";
+ && student.marks.maths>=33 
+ && student.marks.science>=33 ? "Pass" :"Fail";
 console.log(student)};
 
