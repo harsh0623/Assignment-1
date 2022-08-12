@@ -1,5 +1,5 @@
 import React from "react";
-import ReportCardComponent from "../reportCard.component";
+import ReportCardComponent from "./reportCard.component";
 
 export function ReportComponent(props){
     
@@ -19,13 +19,8 @@ export function ReportComponent(props){
           </select>
         </div>
         <div className="row mt-4">
-          <ReportCardComponent
-            studentInfo={props.students[0]}
-          ></ReportCardComponent>
-
-          <ReportCardComponent
-            studentInfo={props.students[1]}
-          ></ReportCardComponent>
+          <ReportCardComponent studentInfo={props.students[0]}/>
+          <ReportCardComponent studentInfo={props.students[1]}/>
         </div>
       </div>
     );
