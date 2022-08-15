@@ -3,11 +3,12 @@ import './App.css';
 import HeaderComponent from './components/header.component'; 
 import FormComponent from './components/form.component';
 import {ReportComponent} from './components/report.component';
+import { useState } from 'react';
 function App() {
-    const student=[
-        {
+    const [students, addStudents] = useState([
+         {
             id: 1,
-            Name:"Rajesh",
+            Name: "Rajesh",
             course: "B.tech",
             semester: "V",
             maths: 38,
@@ -23,14 +24,18 @@ function App() {
             english: 89,
             science: 75
         }
-    ]
+    ])
+    const addStudentFromForm=(student) => {
+        addStudents([...students, student])    
+    }
+   console.log(students)
  return ( 
   <>
   <HeaderComponent></HeaderComponent>
    <div className="container-fluid mt-4">
             <div className="row">
-               <FormComponent></FormComponent>    
-             <ReportComponent students={student}></ReportComponent>
+                 <FormComponent addStudentFromForm={addStudentFromForm} />    
+               <ReportComponent students={students}></ReportComponent>
               </div>
         </div>
        </>

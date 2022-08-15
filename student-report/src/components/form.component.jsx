@@ -1,103 +1,90 @@
 import React from "react";
 import { useState } from "react";
+import { addStudentToFirebase } from "../services/student.service";
 import InputBox from "./input.component";
 
-const FormComponent = () => {
+
+const FormComponent = (props) => {
   let [student, setStudent] = useState({
     id: null,
     Name: null,
     course:null,
-    seme: null,
-    maths: null,
+    sem: null,
+     maths: null,
     english: null,
     science:null
   })
-  const addStudent = () => {
-    console.log(student);
+  const addStudent = (event) => {
+    event.preventDefault();
+    addStudentToFirebase(student);
+    props.addStudentFromForm(student);
   };
   const handleInputChange = (event) => {
-    setStudent=(()=>({...student,[event.target.id]:event.target.value}))
+    setStudent( ()=>({...student,[event.target.id]:event.target.value}))
   }
   return (
     <div className="col-3">
       <form onSubmit={addStudent}>
         <div className="form-group">
           <div className="row">
-              <InputBox
+            <InputBox
               type="number"
               id="id"
               placeholder="ID"
               value={student.id}
               handleInputChange={handleInputChange}
-              />
-            <div className="col-6">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="name"
-                placeholder="Name"
-              />
-            </div>
+            />
+            <InputBox
+              type="text"
+              id="Name"
+              placeholder="Name"
+              value={student.Name}
+              handleInputChange={handleInputChange}
+            />
           </div>
-          </div>
-          <div className="row mt-2">
-            <div className="col-6">
-              <label htmlFor="course">Course:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="course"
-                placeholder="Course"
-              />
-            </div>
-            <div class="col-6">
-              <label htmlFor="sem">Semmester:</label>
-              <input
-                type="text"
-                className="form-control"
-                id="sem"
-                placeholder="Semmester"
-              />
-            </div>
-          </div>
-          <div className="row mt-2">
-            <h6 className="mt-3 fw-bold">Marks:</h6>
-            <div className="col-4">
-              <label htmlFor="maths">
-                <small>Maths</small>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="maths"
-                placeholder="Maths"
-              />
-            </div>
-            <div className="col-4">
-              <label htmlFor="english">
-                <small>English:</small>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="english"
-                placeholder="English"
-              />
-            </div>
-            <div className="col-4">
-              <label htmlFor="science">
-                <small>Science:</small>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="science"
-                placeholder="Science"
-              />
-            </div>
-          <button className="btn btn-success mt-4 ps-5 pe-5">Add</button>
         </div>
+        <div className="row mt-2">
+          <InputBox
+            type="text"
+            id="course"
+            placeholder="Course"
+            value={student.course}
+            handleInputChange={handleInputChange}
+          />
+          <InputBox
+            type="text"
+            id="sem"
+            placeholder="Semester"
+            value={student.sem}
+            handleInputChange={handleInputChange}
+          />
+        </div>
+        <div className="row mt-2">
+          <h6 className="mt-3 fw-bold">Marks:</h6>
+          <InputBox
+            type="number"
+            id="maths"
+            placeholder="Maths"
+            value={parseInt(student.maths)}
+            handleInputChange={handleInputChange}
+          />
+          <InputBox
+            type="number"
+            id="english"
+            placeholder="English"
+            value={parseInt(student.english)}
+            handleInputChange={handleInputChange}
+          />
+          <InputBox
+            type="number"
+            id="science"
+            placeholder="Science"
+            value={parseInt(student.science)}
+            handleInputChange={handleInputChange}
+          />
+        </div>
+        <button type="submit"
+        className="btn btn-success mt-4 ps-5 pe-5 col-6">Add</button>
       </form>
     </div>
   );
