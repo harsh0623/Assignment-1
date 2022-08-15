@@ -4,37 +4,28 @@ import HeaderComponent from './components/header.component';
 import FormComponent from './components/form.component';
 import {ReportComponent} from './components/report.component';
 import { useState } from 'react';
+import { useEffect } from 'react';
+import { getStudentsFromFirebase } from './services/student.service';
 function App() {
-    const [students, addStudents] = useState([
-         {
-            id: 1,
-            Name: "Rajesh",
-            course: "B.tech",
-            semester: "V",
-            maths: 38,
-            english: 89,
-            science: 75
-        },
-        {
-            id: 2,
-            Name: "Rohit",
-            course: "BCA",
-            semester: "V",
-            maths: 18,
-            english: 89,
-            science: 75
-        }
-    ])
+    const [students, addStudents] = useState([]
+    );
+  const [isUpdateRequired, setUpdate] = useState(true);
     const addStudentFromForm=(student) => {
         addStudents([...students, student])    
     }
-   console.log(students)
+  useEffect(() => {
+    if(isUpdateRequired)
+    getStudentsFromFirebase()
+      .then(students => addStudents(students))
+    setUpdate(false)
+  }, [isUpdateRequired])
+
  return ( 
   <>
   <HeaderComponent></HeaderComponent>
    <div className="container-fluid mt-4">
             <div className="row">
-                 <FormComponent addStudentFromForm={addStudentFromForm} />    
+         <FormComponent addStudentFromForm={addStudentFromForm} setUpdate={ setUpdate} />    
                <ReportComponent students={students}></ReportComponent>
               </div>
         </div>

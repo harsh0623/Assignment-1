@@ -3,7 +3,7 @@ import React from "react";
 const ReportCardComponent = (props) => {
   const student = props.studentInfo;
   const total =
-    student?.maths + student?.english + student?.science;
+    parseInt(student?.maths) + parseInt(student?.english) + parseInt(student?.science);
   const PassOrFail = student?.maths > 33 && student?.english > 33 && student?.science > 33
       ? "Pass"
       : "Fail";

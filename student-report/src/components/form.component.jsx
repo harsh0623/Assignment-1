@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { addStudentToFirebase } from "../services/student.service";
+import { addStudentToFirebase, getStudentsFromFirebase } from "../services/student.service";
 import InputBox from "./input.component";
 
 
@@ -17,8 +17,9 @@ const FormComponent = (props) => {
   const addStudent = (event) => {
     event.preventDefault();
     addStudentToFirebase(student);
-    props.addStudentFromForm(student);
+    props.setUpdate(true);
   };
+  useState(()=>getStudentsFromFirebase())
   const handleInputChange = (event) => {
     setStudent( ()=>({...student,[event.target.id]:event.target.value}))
   }
@@ -65,21 +66,21 @@ const FormComponent = (props) => {
             type="number"
             id="maths"
             placeholder="Maths"
-            value={parseInt(student.maths)}
+            value={student.maths}
             handleInputChange={handleInputChange}
           />
           <InputBox
             type="number"
             id="english"
             placeholder="English"
-            value={parseInt(student.english)}
+            value={student.english}
             handleInputChange={handleInputChange}
           />
           <InputBox
             type="number"
             id="science"
             placeholder="Science"
-            value={parseInt(student.science)}
+            value={student.science}
             handleInputChange={handleInputChange}
           />
         </div>
